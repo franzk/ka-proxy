@@ -1,0 +1,37 @@
+[
+  {
+    "domains": ["example.com", "www.example.com"],
+    "service": "frontend-app",
+    "port": 80
+  },
+  {
+    "domains": ["api.example.com"],
+    "service": "backend-api",
+    "port": 3000
+  },
+  {
+    "domains": ["auth.example.com"],
+    "service": "auth-server",
+    "port": 8080
+  },
+  {
+    "domains": ["admin.example.com"],
+    "service": "admin-panel",
+    "port": 3001
+  },
+  {
+    "domains": ["anotherdomain.io", "www.anotherdomain.io"],
+    "service": "second-frontend",
+    "port": 80
+  },
+  {
+    "domains": ["api.anotherdomain.io"],
+    "service": "second-api",
+    "port": 4000
+  },
+  {
+    "domains": ["auth.anotherdomain.io"],
+    "service": "second-auth",
+    "port": 9090
+  }
+]

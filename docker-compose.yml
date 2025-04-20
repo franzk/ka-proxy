@@ -1,0 +1,16 @@
+services:
+  proxy-nginx:
+    build: .
+    container_name: reverse-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ${CERTS_PATH}:/etc/ssl/ka-proxy:ro
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    name: nginx_proxy

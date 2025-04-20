@@ -1,0 +1,47 @@
+name: Deploy Nginx Configuration
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      PROXY_DIR: /home/ka-proxy/
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Use apps.json from repo or fallback to secret APPS_JSON
+        run: |
+          if [ -f apps.json ]; then
+            echo "✅ Using apps.json from repository"
+          else
+            echo "⚠️ apps.json not found, creating it from secret"
+            echo '${{ secrets.APPS_JSON }}' > apps.json
+          fi
+          ssh -o StrictHostKeyChecking=no "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "mkdir -p $PROXY_DIR"
+          scp -o StrictHostKeyChecking=no apps.json ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${PROXY_DIR}
+
+      - name: Copy Docker and Nginx configuration files
+        run: |
+          scp -o StrictHostKeyChecking=no Dockerfile ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${PROXY_DIR}
+          scp -o StrictHostKeyChecking=no docker-compose.yml ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${PROXY_DIR}
+          scp -o StrictHostKeyChecking=no generate_nginx_config.sh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${PROXY_DIR}
+          scp -o StrictHostKeyChecking=no .env ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${PROXY_DIR}
+
+      - name: Deploy proxy-nginx without stopping shared services
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << EOF
+            set -e
+            cd ${PROXY_DIR}
+            docker-compose stop proxy-nginx || true
+            docker-compose rm -f proxy-nginx || true
+            docker-compose up -d --build proxy-nginx
+          EOF

@@ -18,6 +18,13 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Debug SSH Agent
+        run: ssh-add -l
+
+      - name: Test SSH Connection
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo '✅ SSH connection successful'"
+
       - name: Use apps.json from repo or fallback to secret APPS_JSON
         run: |
           if [ -f apps.json ]; then

@@ -141,12 +141,12 @@ The `generate_nginx_config.sh` script:
 
 ### Docker Networking
 
-The proxy creates a Docker network named `nginx_proxy`. Make sure your services are connected to this network to be accessible by the proxy.
+The proxy creates a Docker network named `ka-proxy-network`. Make sure your services are connected to this network to be accessible by the proxy.
 
 ## Troubleshooting
 
 - **Certificate Issues**: Ensure your certificates are correctly named and placed in the specified directory
-- **Connection Refused**: Make sure your services are running and accessible within the Docker network named `nginx_proxy`
+- **Connection Refused**: Make sure your services are running and accessible within the Docker network named `ka-proxy-network`
 - **Name Resolution**: The proxy uses Docker's internal DNS. Make sure service names match exactly
 
 ## Contributing

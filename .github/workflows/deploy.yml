@@ -43,12 +43,17 @@ jobs:
           scp -o StrictHostKeyChecking=no generate_nginx_config.sh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${PROXY_DIR}
           scp -o StrictHostKeyChecking=no .env ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${PROXY_DIR}
 
-      - name: Deploy proxy-nginx without stopping shared services
+      - name: Deploy ka-proxy without stopping shared services
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << EOF
             set -e
             cd ${PROXY_DIR}
-            docker-compose stop proxy-nginx || true
-            docker-compose rm -f proxy-nginx || true
-            docker-compose up -d --build proxy-nginx
+            
+            docker-compose stop ka-proxy || true
+            
+            docker-compose rm -f ka-proxy || true
+            # Force removal of the container by name if it still exists
+            docker ps -a -q --filter "name=ka-proxy" | xargs -r docker rm -f
+
+            docker-compose up -d --build ka-proxy
           EOF

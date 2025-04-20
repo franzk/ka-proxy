@@ -121,6 +121,10 @@ To use the GitHub Actions workflow, you need to set up the following secrets in 
 
 ## Technical Details
 
+The diagram below illustrates how `ka-proxy` works:
+
+![ka-proxy architecture](./ka-proxy-flowchart.svg)
+
 ### Architecture
 
 ka-proxy uses a simple but effective architecture:

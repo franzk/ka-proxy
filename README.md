@@ -12,6 +12,8 @@ ka-proxy is a Docker-based reverse proxy solution that:
 - Configures itself dynamically based on a JSON configuration file
 - Is designed to be easily deployed and updated via GitHub Actions
 
+![ka-proxy app flow](./ka-proxy-af.svg)
+
 ## Features
 
 - **Dynamic Configuration**: Define your services and domains in a simple JSON format

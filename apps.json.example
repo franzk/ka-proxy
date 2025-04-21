@@ -2,36 +2,43 @@
   {
     "domains": ["example.com", "www.example.com"],
     "service": "frontend-app",
-    "port": 80
+    "port": 80,
+    "certsPath": "/etc/ssl/ka-proxy/example"
   },
   {
     "domains": ["api.example.com"],
     "service": "backend-api",
-    "port": 3000
+    "port": 3000,
+    "certsPath": "/etc/ssl/ka-proxy/example"
   },
   {
     "domains": ["auth.example.com"],
     "service": "auth-server",
-    "port": 8080
+    "port": 8080,
+    "certsPath": "/etc/ssl/ka-proxy/example"
   },
   {
     "domains": ["admin.example.com"],
     "service": "admin-panel",
-    "port": 3001
+    "port": 3001,
+    "certsPath": "/etc/ssl/ka-proxy/example"
   },
   {
     "domains": ["anotherdomain.io", "www.anotherdomain.io"],
     "service": "second-frontend",
-    "port": 80
+    "port": 80,
+    "certsPath": "/etc/ssl/ka-proxy/anotherdomain"
   },
   {
     "domains": ["api.anotherdomain.io"],
     "service": "second-api",
-    "port": 4000
+    "port": 4000,
+    "certsPath": "/etc/ssl/ka-proxy/anotherdomain"
   },
   {
     "domains": ["auth.anotherdomain.io"],
     "service": "second-auth",
-    "port": 9090
+    "port": 9090,
+    "certsPath": "/etc/ssl/ka-proxy/anotherdomain"
   }
 ]

@@ -53,9 +53,8 @@ while IFS= read -r app_json; do
     listen 443 ssl;
     server_name ${domains};
 
-    ssl_certificate ${certsPath}/cert.pem;
+    ssl_certificate ${certsPath}/fullchain.pem;
     ssl_certificate_key ${certsPath}/privkey.pem;
-    ssl_trusted_certificate ${certsPath}/chain.pem;
 
     resolver 127.0.0.11;
 

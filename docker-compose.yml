@@ -10,8 +10,8 @@ services:
     volumes:
       - ${CERTS_PATH}:/etc/ssl/ka-proxy:ro
     networks:
-      - proxy
+      - ka-proxy-network
 
 networks:
-  proxy:
+  ka-proxy-network:
     name: ka-proxy-network

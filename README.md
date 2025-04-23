@@ -83,21 +83,18 @@ Certificates should be organized in the following directory structure:
 ```
 CERTS_PATH/
 ├── domain1/
-│   ├── cert.pem
+│   ├── fullchain.pem
 │   ├── privkey.pem
-│   └── chain.pem
 ├── domain2/
-│   ├── cert.pem
+│   ├── fullchain.pem
 │   ├── privkey.pem
-│   └── chain.pem
 └── ...
 ```
 
 Each domain has its own subdirectory under the CERTS_PATH directory containing the required certificate files:
 
-- `cert.pem`: SSL certificate
+- `fullchain.pem`: SSL certificate
 - `privkey.pem`: Private key
-- `chain.pem`: Certificate chain
 
 In your apps.json file, the certsPath property must be an absolute path that is located within the CERTS_PATH directory specified in your .env file. For example, if CERTS_PATH=/etc/ssl/ka-proxy, then your certsPath in apps.json might be /etc/ssl/ka-proxy/domain1.
 

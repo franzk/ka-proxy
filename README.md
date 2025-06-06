@@ -100,7 +100,7 @@ In your apps.json file, the certsPath property must be an absolute path that is 
 
 ## GitHub Actions Deployment
 
-This project includes a GitHub Actions workflow for automated deployment.
+This project includes a GitHub Actions workflow for automated deployment
 
 ### How the Deployment Works
 

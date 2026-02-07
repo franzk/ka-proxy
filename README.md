@@ -35,7 +35,7 @@ ka-proxy is a Docker-based reverse proxy solution that:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/ka-proxy.git
+   git clone https://github.com/franzk/ka-proxy.git
    cd ka-proxy
    ```
 
@@ -68,12 +68,32 @@ ka-proxy is a Docker-based reverse proxy solution that:
 The `apps.json` file is the core configuration file that defines how traffic is routed. Each entry should contain:
 
 ```json
-{
-	"domains": ["example.com", "www.example.com"], // List of domain names
-	"service": "service-name", // Docker service name to route to
-	"port": 80, // Port the service is running on
-	"certsPath": "/etc/ssl/ka-proxy/example.com" // Path to SSL certificates
-}
+[
+	{
+		"domains": ["my-project.net", "www.my-project.net"],
+		"service": "landing-page-site",
+		"port": 80,
+		"certsPath": "/etc/ssl/ka-proxy/franzka"
+	},
+	{
+		"domains": ["app.my-project.com"],
+		"service": "ka-front",
+		"port": 80,
+		"certsPath": "/etc/ssl/ka-proxy/app.my-project.com"
+	},
+	{
+		"domains": ["api.my-project.com"],
+		"service": "ka-gateway",
+		"port": 8080,
+		"certsPath": "/etc/ssl/ka-proxy/api.my-project.com"
+	},
+	{
+		"domains": ["auth.my-project.com"],
+		"service": "ka-keycloak",
+		"port": 5080,
+		"certsPath": "/etc/ssl/ka-proxy/auth.my-project.com"
+	}
+]
 ```
 
 ### SSL Certificates
